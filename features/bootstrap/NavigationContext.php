@@ -1,13 +1,14 @@
 <?php
 
 use Behat\Behat\Context\Context;
+use \Behat\MinkExtension\Context\MinkContext;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 
 /**
  * Defines application features from the specific context.
  */
-class FeatureContext implements Context
+class NavigationContext extends MinkContext implements Context
 {
     /**
      * Initializes context.
@@ -19,5 +20,4 @@ class FeatureContext implements Context
     public function __construct()
     {
     }
-
 }
