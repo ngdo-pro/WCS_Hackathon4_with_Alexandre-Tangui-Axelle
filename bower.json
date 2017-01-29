@@ -1,0 +1,17 @@
+{
+  "name": "ngdo-symfony-starting-kit",
+  "description": "This is a Symfony Starting Kit",
+  "main": "index.js",
+  "authors": [
+    "Nicolas Gomes de Oliveira <ngdo27@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/ngdo-pro/Symfony-Starting-Kit",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
