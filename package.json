@@ -1,0 +1,22 @@
+{
+  "name": "ngdo-symfony-starting-kit",
+  "version": "1.0.0",
+  "description": "This is a Symfony Starting Kit",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngdo-pro/Symfony-Starting-Kit.git"
+  },
+  "author": "Nicolas Gomes de Oliveira <ngdo27@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ngdo-pro/Symfony-Starting-Kit/issues"
+  },
+  "homepage": "https://github.com/ngdo-pro/Symfony-Starting-Kit#readme"
+}
