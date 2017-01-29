@@ -48,3 +48,6 @@ initializedProject
     + [Tests](http://symfony.com/doc/current/best_practices/tests.html)
         + Define a functional test that at least checks if your application pages are successfully loading.
         + Hardcode the URLs used in the functional tests instead of using the URL generator.
+        
+2. Behat
+    + Launch in an other command tab : `java -jar selenium.jar` to launch the selenium server.
