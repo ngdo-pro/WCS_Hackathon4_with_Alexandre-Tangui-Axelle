@@ -15,4 +15,4 @@
 /vendor/
 /web/bundles/
 /node_modules
-app/Resources/vendors
+app/Resources/front_end/vendors
