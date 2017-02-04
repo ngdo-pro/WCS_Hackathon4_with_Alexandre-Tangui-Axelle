@@ -1,6 +1,7 @@
 MigrationBundle\Entity\Answer:
     type: entity
     table: answer
+    repositoryClass: MigrationBundle\Repository\AnswerRepository
     indexes:
         a_dom:
             columns:

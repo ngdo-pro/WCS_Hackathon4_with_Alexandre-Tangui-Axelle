@@ -29,6 +29,20 @@ class Word
     }
 
     /**
+     * Set id
+     *
+     * @param int $id
+     *
+     * @return Word
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
      * Set tag
      *
      * @param string $tag

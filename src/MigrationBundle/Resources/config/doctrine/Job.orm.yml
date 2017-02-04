@@ -1,6 +1,7 @@
 MigrationBundle\Entity\Job:
     type: entity
     table: job
+    repositoryClass: MigrationBundle\Repository\JobRepository
     indexes:
         j_dom:
             columns:

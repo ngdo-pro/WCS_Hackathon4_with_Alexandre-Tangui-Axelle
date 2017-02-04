@@ -22,6 +22,19 @@ class Profession
      */
     private $domain;
 
+    /**
+     * Set id
+     *
+     * @param int $id
+     *
+     * @return Profession
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     /**
      * Get id
