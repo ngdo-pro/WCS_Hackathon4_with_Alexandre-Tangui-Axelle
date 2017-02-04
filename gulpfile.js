@@ -6,8 +6,13 @@ var sass    = require('gulp-sass');
 
 //paths is an object containing all paths of the assets
 var paths = {
-    vendorJs: [],
-    vendorCss: [],
+    vendorJs: [
+        './app/Resources/front_end/vendors/vue/dist/vue.min.js',
+        './app/Resources/front_end/vendors/material-design-lite/material.min.js'
+    ],
+    vendorCss: [
+        './app/Resources/front_end/vendors/material-design-lite/material.min.css'
+    ],
     fonts: [],
     js: [
         './app/Resources/front_end/dev/js/*.js'
