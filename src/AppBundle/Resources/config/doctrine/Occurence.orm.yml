@@ -1,0 +1,28 @@
+AppBundle\Entity\Occurence:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\OccurenceRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        number:
+            type: float
+            nullable: true
+    manyToOne:
+      profession:
+        targetEntity: Profession
+        inversedBy: occurences
+        joinColumn:
+          name: profession_id
+          referencedColumnName: id
+      word:
+        targetEntity: Word
+        inversedBy: occurences
+        joinColumn:
+          name: word_id
+          referencedColumnName: id
+    lifecycleCallbacks: {  }
