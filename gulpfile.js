@@ -8,12 +8,15 @@ var sass    = require('gulp-sass');
 var paths = {
     vendorJs: [
         './app/Resources/front_end/vendors/vue/dist/vue.min.js',
-        './app/Resources/front_end/vendors/material-design-lite/material.min.js'
+        './app/Resources/front_end/vendors/jquery/dist/jquery.min.js',
+        './app/Resources/front_end/vendors/materialize/dist/js/materialize.min.js'
     ],
     vendorCss: [
-        './app/Resources/front_end/vendors/material-design-lite/material.min.css'
+        './app/Resources/front_end/vendors/materialize/dist/css/materialize.min.css'
     ],
-    fonts: [],
+    fonts: [
+        './app/Resources/front_end/vendors/materialize/dist/fonts/roboto/*'
+    ],
     js: [
         './app/Resources/front_end/dev/js/*.js'
     ],
