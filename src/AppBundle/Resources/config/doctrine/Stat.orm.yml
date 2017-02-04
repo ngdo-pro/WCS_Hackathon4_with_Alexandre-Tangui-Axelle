@@ -12,8 +12,13 @@ AppBundle\Entity\Stat:
         name:
             type: string
             length: 255
-            unique: true
         number:
             type: float
             nullable: true
+        type:
+            type: string
+            length: 255
+            unique: false
+            nullable: true
+
     lifecycleCallbacks: {  }
