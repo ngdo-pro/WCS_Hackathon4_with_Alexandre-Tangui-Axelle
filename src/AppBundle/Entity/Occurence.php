@@ -17,6 +17,19 @@ class Occurence
      */
     private $number;
 
+    /**
+     * Set id
+     *
+     * @param int $id
+     *
+     * @return Occurence
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     /**
      * Get id

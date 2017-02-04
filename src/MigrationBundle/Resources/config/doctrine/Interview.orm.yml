@@ -1,6 +1,7 @@
 MigrationBundle\Entity\Interview:
     type: entity
     table: interview
+    repositoryClass: MigrationBundle\Repository\InterviewRepository
     indexes:
         IDX_CF1D3C34A76ED395:
             columns:

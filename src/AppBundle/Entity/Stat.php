@@ -22,6 +22,19 @@ class Stat
      */
     private $number;
 
+    /**
+     * Set id
+     *
+     * @param int $id
+     *
+     * @return Stat
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     /**
      * Get id
@@ -79,5 +92,34 @@ class Stat
     public function getNumber()
     {
         return $this->number;
+    }
+    /**
+     * @var string
+     */
+    private $type;
+
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return Stat
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }
