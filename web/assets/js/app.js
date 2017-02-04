@@ -1,2 +1,2 @@
-var app=new Vue({delimiters:["${","}"],el:"#app",data:{message:"Hello Vue!"}});
+$("#searchField1").keyup(function(){var e=$(this).val();e.length>=3&&$.ajax({type:"POST",url:"/interview/search/"+e,dataType:"json",timeout:3e3,success:function(e){var a=JSON.parse(e.data);putchips(a)},error:function(){$("#wordautocomp").text("Ajax call error")}})});var app=new Vue({delimiters:["${","}"],el:"#searchBar",data:{message:"Hello Vue!"}});
 $(document).ready(function(){$("#scrollToSection1").on("click",function(){$("html, body").animate({scrollTop:$("#section1").offset().top},450)})});
