@@ -15,7 +15,7 @@ var paths = {
         './app/Resources/front_end/vendors/materialize/dist/css/materialize.min.css'
     ],
     fonts: [
-        './app/Resources/front_end/vendors/materialize/dist/fonts/roboto/*'
+        './app/Resources/front_end/vendors/materialize/dist/fonts/**/*'
     ],
     js: [
         './app/Resources/front_end/dev/js/*.js'

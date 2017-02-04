@@ -1,0 +1,1 @@
+body{display:flex;min-height:100vh;flex-direction:column}body header{align-items:center;background:#031c1a;display:flex;flex-direction:column;height:100vh;justify-content:center}body header a i.material-icons{font-size:4rem}body main{flex:1 0 auto}

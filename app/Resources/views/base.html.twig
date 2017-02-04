@@ -3,13 +3,22 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('assets/css/vendor.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <header>
+            {% include 'template/header.html.twig' %}
+        </header>
+        <main>
+            {% block body %}{% endblock %}
+        </main>
+        <footer>
+
+        </footer>
         <script src="{{ asset('assets/js/vendor.js') }}"></script>
         <script src="{{ asset('assets/js/app.js') }}"></script>
         {% block javascripts %}{% endblock %}
