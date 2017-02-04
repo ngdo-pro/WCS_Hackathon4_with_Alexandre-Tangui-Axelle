@@ -1,0 +1,43 @@
+MigrationBundle\Entity\Answer:
+    type: entity
+    table: answer
+    repositoryClass: MigrationBundle\Repository\AnswerRepository
+    indexes:
+        a_dom:
+            columns:
+                - domain
+        a_word:
+            columns:
+                - word
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        word:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        domain:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+    manyToMany:
+        interview:
+            targetEntity: Interview
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: answer
+            inversedBy: null
+            joinTable: null
+            orderBy: null
+    lifecycleCallbacks: {  }

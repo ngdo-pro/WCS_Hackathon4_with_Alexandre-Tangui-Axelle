@@ -1,0 +1,55 @@
+<?php
+
+namespace AppBundle\Entity;
+
+/**
+ * Occurence
+ */
+class Occurence
+{
+    /**
+     * @var int
+     */
+    private $id;
+
+    /**
+     * @var float
+     */
+    private $number;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set number
+     *
+     * @param float $number
+     *
+     * @return Occurence
+     */
+    public function setNumber($number)
+    {
+        $this->number = $number;
+
+        return $this;
+    }
+
+    /**
+     * Get number
+     *
+     * @return float
+     */
+    public function getNumber()
+    {
+        return $this->number;
+    }
+}
+

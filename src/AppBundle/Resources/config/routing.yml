@@ -1,3 +1,7 @@
 app_homepage:
     path:     /
     defaults: { _controller: AppBundle:Main:index }
+
+autocomplete:
+    path:     /autocomplete
+    defaults: { _controller: AppBundle:Main:wordAutocomplete }

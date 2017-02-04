@@ -1,0 +1,34 @@
+MigrationBundle\Entity\Job:
+    type: entity
+    table: job
+    repositoryClass: MigrationBundle\Repository\JobRepository
+    indexes:
+        j_dom:
+            columns:
+                - domain
+        j_name:
+            columns:
+                - name
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        domain:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }
