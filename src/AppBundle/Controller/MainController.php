@@ -11,11 +11,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 class MainController extends Controller
 {
-    public function indexAction($words)
+    public function indexAction()
     {
+        $words = array();
         $alljobs = $this->getDoctrine()->getRepository('AppBundle:Occurence')->findjobs([9,200]);
-        var_dump($alljobs);
-        $nbword = 2; //count($words);
+        $nbword = count($words);
         $sortings = [];
         foreach ($alljobs as $key => $alljob){
             $jobname = $this->getDoctrine()->getRepository('AppBundle:Occurence')->find($alljob['id'])->getProfession()->getName();
@@ -28,23 +28,22 @@ class MainController extends Controller
              $sortings[$jobname]=1;
             }
         }
-        var_dump($sortings);
         $result=[];
         foreach($sortings as $key => $value){
             if($value ==$nbword){
                 $result[]=$key;
             }
         }
-        var_dump($result);
         return $this->render('app/main/index.html.twig');
     }
 
     public function wordAutocompleteAction(Request $request)
     {
-        $formatted = $request->request->get('keyword');
+        $keyword = $request->request->get('keyword');
 
 
 
-        return new JsonResponse($formatted);
+
+        return new JsonResponse($keyword);
     }
 }

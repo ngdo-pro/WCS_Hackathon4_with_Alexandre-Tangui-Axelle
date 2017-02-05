@@ -18,13 +18,3 @@ $(document).ready(function(){
         }
     });
 });
-
-
-
-var app = new Vue({
-    delimiters: ['${', '}'],
-    el: '#searchBar',
-    data: {
-        message: 'Hello Vue!'
-    }
-});
