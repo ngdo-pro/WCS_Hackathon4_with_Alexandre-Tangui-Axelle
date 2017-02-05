@@ -68,6 +68,7 @@ class MainController extends Controller
                 if($data != null){
                     $words[] = $data;
                 }
+
             }
             $alljobs = $this->getDoctrine()->getRepository('AppBundle:Occurence')->findjobs($words);
             $nbword = count($words);
