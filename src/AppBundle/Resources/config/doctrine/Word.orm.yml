@@ -16,5 +16,5 @@ AppBundle\Entity\Word:
     oneToMany:
         occurences:
             targetEntity: Occurence
-            mappedBy: Word
+            mappedBy: word
     lifecycleCallbacks: {  }

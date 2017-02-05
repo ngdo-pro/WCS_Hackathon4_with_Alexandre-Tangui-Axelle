@@ -5,7 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Occurence;
 use AppBundle\Entity\Word;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class MainController extends Controller
 {
@@ -14,17 +16,12 @@ class MainController extends Controller
         return $this->render('app/main/index.html.twig');
     }
 
-    public function wordAutocompleteAction()
+    public function wordAutocompleteAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $words = $em->getRepository(Word::class)->findBy(array('tag' => "Créativité"));
-        $formatted = array();
-        foreach ($words as $word){
-            /** @var Occurence $occurence */
-            foreach ($word->getOccurences() as $occurence){
-                $formatted[] = $occurence->getProfession()->getName();
-            }
-        }
+        $formatted = $request->request->get('keyword');
+
+
+
         return new JsonResponse($formatted);
     }
 }
