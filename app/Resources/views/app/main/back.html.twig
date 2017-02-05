@@ -1,17 +1,20 @@
 {% extends 'base.html.twig' %}
 {% block content %}
+
+    <h1 style="text-align:center">{{ title }}</h1>
     {% for stat in stats %}
-    <div>
-        <table>
-            <tr>
+    <div align="center">
+        <table style="text-align:center" border="1">
+         {#   <tr>
                 <th>Firstname</th>
                 <th>Lastname</th>
             </tr>
+            #}
 
         {% for data in stat %}
             <tr>
                 <td>{{ data.name }}</td>
-                <td>{{ data.number }}</td>
+                <td>{{ data.number }} %</td>
 
             </tr>
         {% endfor %}
