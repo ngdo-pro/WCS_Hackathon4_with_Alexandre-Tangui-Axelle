@@ -14,7 +14,7 @@ class MainController extends Controller
     public function indexAction()
     {
         $words = array();
-        $alljobs = $this->getDoctrine()->getRepository('AppBundle:Occurence')->findjobs([9,200]);
+        $alljobs = $this->getDoctrine()->getRepository('AppBundle:Occurence')->findjobs(["Gestion"]);
         $nbword = count($words);
         $sortings = [];
         foreach ($alljobs as $key => $alljob){
@@ -44,5 +44,10 @@ class MainController extends Controller
         $words = $em->getRepository(Word::class)->searchWords($keyword);
 
         return new JsonResponse($words);
+    }
+
+    public function resultsAction(Request $request)
+    {
+
     }
 }
