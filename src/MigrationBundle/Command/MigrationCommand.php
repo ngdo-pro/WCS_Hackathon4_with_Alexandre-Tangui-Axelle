@@ -40,6 +40,11 @@ class MigrationCommand extends ContainerAwareCommand
         $this->connection = $targetManager->getConnection();
         $this->platform   = $this->connection->getDatabasePlatform();
 
+        // count total interview
+        $interview = $doctrine->getRepository("MigrationBundle:Interview", 'migration')->findAll();
+        $totalInt = count($interview);
+        $output->writeln($totalInt);
+
         // migrating answer database to word
         $this->truncate('word');
         $output->writeln("Migrating words");
@@ -94,7 +99,7 @@ class MigrationCommand extends ContainerAwareCommand
         foreach ($domains as $domain) {
             $stat = new Stat();
             $stat->setName($domain['domain']);
-            $stat->setNumber($domain['total']);
+            $stat->setNumber(round(($domain['total']/$totalInt)*100, 2));
             $stat->setType('domain20-global');
             $targetManager->persist($stat);
         }
@@ -111,7 +116,7 @@ class MigrationCommand extends ContainerAwareCommand
         foreach ($jobs as $job) {
             $stat = new Stat();
             $stat->setName($job['name']);
-            $stat->setNumber($job['total']);
+            $stat->setNumber(round(($job['total']/$totalInt)*100, 2));
             $stat->setType('job20-global');
             $targetManager->persist($stat);
         }
@@ -128,7 +133,7 @@ class MigrationCommand extends ContainerAwareCommand
         foreach ($words as $word) {
             $stat = new Stat();
             $stat->setName($word['word']);
-            $stat->setNumber($word['total']);
+            $stat->setNumber(round(($word['total']/$totalInt)*100, 2));
             $stat->setType('word20-global');
             $targetManager->persist($stat);
         }
@@ -140,8 +145,9 @@ class MigrationCommand extends ContainerAwareCommand
 
         $output->writeln("Calculating stats by sexe");
         $sexes = ['H','F'];
-
         foreach($sexes as $sexe) {
+            $totalsexe = $doctrine->getRepository('MigrationBundle:Interview', 'migration')->getTotalBySexe($sexe);
+            $output->writeln($totalsexe);
 
             // calculating stats for domain
 
@@ -150,7 +156,7 @@ class MigrationCommand extends ContainerAwareCommand
             foreach ($domains as $domain) {
                 $stat = new Stat();
                 $stat->setName($domain['domain']);
-                $stat->setNumber($domain['total']);
+                $stat->setNumber(round(($domain['total']/$totalsexe)*100, 2));
                 $stat->setType('domain20-' . $sexe);
                 $targetManager->persist($stat);
             }
@@ -166,7 +172,7 @@ class MigrationCommand extends ContainerAwareCommand
             foreach ($jobs as $job) {
                 $stat = new Stat();
                 $stat->setName($job['name']);
-                $stat->setNumber($job['total']);
+                $stat->setNumber(round(($job['total']/$totalsexe)*100, 2));
                 $stat->setType('job20-' . $sexe);
                 $targetManager->persist($stat);
             }
@@ -187,7 +193,8 @@ class MigrationCommand extends ContainerAwareCommand
         $statuts = ['Collégien','Lycéen', 'Etudiant', 'Parent', 'Demandeur d\'emploi', 'Adulte en réorientation', 'Professionnel de l\'orientation et de la formation', 'Salarié', 'Autre'];
 
         foreach($statuts as $statut) {
-
+            $totalStatus = $doctrine->getRepository("MigrationBundle:Interview", 'migration')->getTotalByStatus($statut);
+            $output->writeln($totalStatus);
             // calculating stats for domain
 
             $domains = $doctrine->getRepository('MigrationBundle:Interview', 'migration')->get20domainsbystatus($statut);

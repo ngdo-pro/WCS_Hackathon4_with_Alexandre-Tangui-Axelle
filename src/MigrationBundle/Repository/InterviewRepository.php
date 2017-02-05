@@ -156,4 +156,27 @@ class InterviewRepository extends \Doctrine\ORM\EntityRepository
         return $qb->getResult();
     }
 
+    public function getTotalBySexe($sexe)
+    {
+        $qb = $this->createQueryBuilder('i')
+            ->select('count(i.id) as total')
+            ->where('u.gender = :sexe')
+            ->setParameter('sexe', $sexe)
+            ->innerJoin('i.user', 'u')
+            ->getQuery();
+
+        return $qb->getSingleScalarResult();
+    }
+
+    public function getTotalByStatus($statut)
+    {
+        $qb = $this->createQueryBuilder('i')
+            ->select('count(i.id) as total')
+            ->where('u.status = :statut')
+            ->setParameter('statut', $statut)
+            ->innerJoin('i.user', 'u')
+            ->getQuery();
+
+        return $qb->getSingleScalarResult();
+    }
 }
