@@ -2,6 +2,7 @@
 {% block content %}
 
     <h1 style="text-align:center">{{ title }}</h1>
+    <br>
     {% for stat in stats %}
     <div align="center">
         <table style="text-align:center" border="1">
@@ -18,6 +19,8 @@
             </tr>
         {% endfor %}
         </table>
+        <br>
+        <br>
     </div>
     {% endfor %}
 {% endblock %}
