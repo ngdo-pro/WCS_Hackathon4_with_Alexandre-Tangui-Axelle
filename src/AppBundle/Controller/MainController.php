@@ -40,10 +40,9 @@ class MainController extends Controller
     public function wordAutocompleteAction(Request $request)
     {
         $keyword = $request->request->get('keyword');
+        $em = $this->getDoctrine()->getManager();
+        $words = $em->getRepository(Word::class)->searchWords($keyword);
 
-
-
-
-        return new JsonResponse($keyword);
+        return new JsonResponse($words);
     }
 }

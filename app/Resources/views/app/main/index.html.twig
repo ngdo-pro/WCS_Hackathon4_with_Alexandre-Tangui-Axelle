@@ -2,10 +2,31 @@
 
 {% block content %}
 
-<div class="row">
-    <div id="searchBar" class="col s4 offset-s4">
-        <input placeholder="edit me" id="searchField1">
+    <div class="row">
+        <div class="col s4 offset-s4">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="text" id="searchField1" class="autocomplete">
+                    <label for="searchField1">Mot-clé n°1</label>
+                </div>
+                <div class="input-field col s12 hide">
+                    <input type="text" id="searchField2" class="autocomplete">
+                    <label for="searchField2">Mot-clé n°2</label>
+                </div>
+                <div class="input-field col s12 hide">
+                    <input type="text" id="searchField3" class="autocomplete">
+                    <label for="searchField3">Mot-clé n°3</label>
+                </div>
+                <div class="input-field col s12 hide">
+                    <input type="text" id="searchField4" class="autocomplete">
+                    <label for="searchField4">Mot-clé n°4</label>
+                </div>
+                <div class="input-field col s12 hide">
+                    <input type="text" id="searchField5" class="autocomplete">
+                    <label for="searchField5">Mot-clé n°5</label>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 
 {% endblock %}
