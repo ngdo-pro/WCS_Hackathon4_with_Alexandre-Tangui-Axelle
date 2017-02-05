@@ -8,9 +8,9 @@ class MainController extends Controller
 {
     public function indexAction($words)
     {
-        $alljobs = $this->getDoctrine()->getRepository('AppBundle:Occurence')->findjobs([9,200]);
+        $alljobs = $this->getDoctrine()->getRepository('AppBundle:Occurence')->findjobs($words);
         var_dump($alljobs);
-        $nbword = 2; //count($words);
+        $nbword = count($words);
         $sortings = [];
         foreach ($alljobs as $key => $alljob){
             $jobname = $this->getDoctrine()->getRepository('AppBundle:Occurence')->find($alljob['id'])->getProfession()->getName();

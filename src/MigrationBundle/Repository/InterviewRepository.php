@@ -157,4 +157,42 @@ class InterviewRepository extends \Doctrine\ORM\EntityRepository
         return $qb->getResult();
     }
 
+    public function getTotalBySexe($sexe)
+    {
+        $qb = $this->createQueryBuilder('i')
+            ->select('count(i.id) as total')
+            ->where('u.gender = :sexe')
+            ->setParameter('sexe', $sexe)
+            ->innerJoin('i.user', 'u')
+            ->getQuery();
+
+        return $qb->getSingleScalarResult();
+    }
+
+    public function getTotalByStatus($statut)
+    {
+        $qb = $this->createQueryBuilder('i')
+            ->select('count(i.id) as total')
+            ->where('u.status = :statut')
+            ->setParameter('statut', $statut)
+            ->innerJoin('i.user', 'u')
+            ->getQuery();
+
+        return $qb->getSingleScalarResult();
+    }
+
+
+    public function getTotalDomainsByAge($ageMin, $ageMax)
+    {
+        $qb = $this->createQueryBuilder('i')
+            ->select('count(i.id) as total')
+            ->where('u.age >= :ageMin')
+            ->andWhere('u.age <= :ageMax')
+            ->setParameter('ageMin', $ageMin)
+            ->setParameter('ageMax', $ageMax)
+            ->innerJoin('i.user', 'u')
+            ->getQuery();
+
+        return $qb->getSingleScalarResult();
+    }
 }
