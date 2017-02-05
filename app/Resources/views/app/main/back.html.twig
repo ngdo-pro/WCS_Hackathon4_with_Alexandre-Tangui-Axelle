@@ -1,4 +1,84 @@
 {% extends 'app/layout.html.twig' %}
+{% block header %}{% endblock %}
 {% block content %}
+    <div class="container">
 
+        <h1 style="text-align:center">{{ title }}</h1>
+        <br>
+        {% for stat in stats %}
+            <div align="center">
+                <table style="text-align:center" border="1">
+                    {# <tr>
+                         <th>Firstname</th>
+                         <th>Lastname</th>
+                     </tr> #}
+
+                    {% for data in stat %}
+                        <tr>
+                            <td>{{ data.name }}</td>
+                            <td>{{ data.number }} %</td>
+
+                        </tr>
+                    {% endfor %}
+                </table>
+                <br>
+                <br>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
+
+{% block javascripts %}
+    {#  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+      <script src="https://code.highcharts.com/highcharts.js"></script>
+      <script src="https://code.highcharts.com/modules/exporting.js"></script>
+      <script type="text/javascript">
+          $(document).ready(function () {
+              {% for stat in stats %}
+              // Build the chart
+              Highcharts.chart('container', {
+                  chart: {
+                      plotBackgroundColor: null,
+                      plotBorderWidth: null,
+                      plotShadow: false,
+                      type: 'pie'
+                  },
+                  title: {
+                      text: 'Test'
+                  },
+                  tooltip: {
+                      pointFormat: '</b>'
+                  },
+                  plotOptions: {
+                      pie: {
+                          allowPointSelect: true,
+                          cursor: 'pointer',
+                          dataLabels: {
+                              enabled: false
+                          },
+                          showInLegend: true
+                      }
+                  },
+                  series: [
+                          {% for data in stat %}
+                      {
+                      name: 'Test',
+                      colorByPoint: true,
+                      data: [{
+                          name: {{ data.name }},
+                          y: {{ data.number }}
+                      }, {
+                          name: 'Chrome',
+                          y: 0.1,
+                          sliced: true,
+                          selected: true
+                      }]
+                      {% endfor %}
+                  }]
+              });
+              {% endfor %}
+          });
+
+      </script> #}
+{% endblock %}
+
