@@ -108,7 +108,8 @@ gulp.task('src', ['js', 'sass', 'images'], function(){
 
 //the "watch" file automatically runs other tasks on change on "watched" files
 gulp.task('watch', function(){
-    gulp.watch([paths.sass, paths.js], ['sass', 'js'])
+    gulp.watch([paths.sass], ['sass']);
+    gulp.watch([paths.js], ['js']);
 });
 
 //the "clean" task delete the /web/assets directory

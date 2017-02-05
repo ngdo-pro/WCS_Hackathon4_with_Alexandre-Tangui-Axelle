@@ -1,0 +1,22 @@
+{% extends 'app/layout.html.twig' %}
+{% block header %}
+{% endblock %}
+{% block content %}
+
+    <div class="row">
+        <div class="col s10 offset-s1">
+            {% if results is empty %}
+                Aucun résultat ne correspond à votre recherche
+            {% else %}
+                <ul>
+                    {% for result in results %}
+                        <li>{{ result }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+    <a href="{{ path('app_homepage') }}">Retour à la recherche</a>
+
+
+{% endblock %}

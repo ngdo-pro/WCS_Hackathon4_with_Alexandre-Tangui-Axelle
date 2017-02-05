@@ -10,9 +10,11 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        <header>
-            {% include 'template/header.html.twig' %}
-        </header>
+        {% block header %}
+            <header>
+                    {% include 'template/header.html.twig' %}
+            </header>
+        {% endblock %}
         <main>
             {% block body %}{% endblock %}
         </main>

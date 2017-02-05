@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $("#searchField1").keyup(function(){
+    $("#form_keyword1").keyup(function(){
         var keyword = $(this).val();
         if ( keyword.length >= 3 ) {
             $.ajax({
@@ -15,7 +15,7 @@ $(document).ready(function(){
                         $('#input1 ul').append('<li>'+ response[i]['tag'] + '</li>');
                         console.log(response[i]['tag']);
                     }
-                    $('#searchField1.autocomplete').autocomplete({
+                    $('#form_keyword1.autocomplete').autocomplete({
                         data: data
                     });
                 },
@@ -25,7 +25,7 @@ $(document).ready(function(){
             });
         }
     });
-    $("#searchField2").keyup(function(){
+    $("#form_keyword2").keyup(function(){
         var keyword = $(this).val();
         if ( keyword.length >= 3 ) {
             $.ajax({
@@ -41,7 +41,7 @@ $(document).ready(function(){
                         $('#input2 ul').append('<li>'+ response[i]['tag'] + '</li>');
                         console.log(response[i]['tag']);
                     }
-                    $('#searchField2.autocomplete').autocomplete({
+                    $('#form_keyword2.autocomplete').autocomplete({
                         data: data
                     });
                 },
@@ -51,7 +51,7 @@ $(document).ready(function(){
             });
         }
     });
-    $("#searchField3").keyup(function(){
+    $("#form_keyword3").keyup(function(){
         var keyword = $(this).val();
         if ( keyword.length >= 3 ) {
             $.ajax({
@@ -67,7 +67,7 @@ $(document).ready(function(){
                         $('#input3 ul').append('<li>'+ response[i]['tag'] + '</li>');
                         console.log(response[i]['tag']);
                     }
-                    $('#searchField3.autocomplete').autocomplete({
+                    $('#form_keyword3.autocomplete').autocomplete({
                         data: data
                     });
                 },
@@ -77,7 +77,7 @@ $(document).ready(function(){
             });
         }
     });
-    $("#searchField4").keyup(function(){
+    $("#form_keyword4").keyup(function(){
         var keyword = $(this).val();
         if ( keyword.length >= 3 ) {
             $.ajax({
@@ -93,7 +93,7 @@ $(document).ready(function(){
                         $('#input4 ul').append('<li>'+ response[i]['tag'] + '</li>');
                         console.log(response[i]['tag']);
                     }
-                    $('#searchField4.autocomplete').autocomplete({
+                    $('#form_keyword4.autocomplete').autocomplete({
                         data: data
                     });
                 },
@@ -103,7 +103,7 @@ $(document).ready(function(){
             });
         }
     });
-    $("#searchField5").keyup(function(){
+    $("#form_keyword5").keyup(function(){
         var keyword = $(this).val();
         if ( keyword.length >= 3 ) {
             $.ajax({
@@ -119,7 +119,7 @@ $(document).ready(function(){
                         $('#input5 ul').append('<li>'+ response[i]['tag'] + '</li>');
                         console.log(response[i]['tag']);
                     }
-                    $('#searchField5.autocomplete').autocomplete({
+                    $('#form_keyword5.autocomplete').autocomplete({
                         data: data
                     });
                 },
@@ -129,6 +129,7 @@ $(document).ready(function(){
             });
         }
     });
+
     $('#showInput2').click(function(e){
         e.preventDefault();
         $('#input2').removeClass('hide');
