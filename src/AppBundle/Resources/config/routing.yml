@@ -1,3 +1,7 @@
 app_homepage:
-    path:     /{words}
+    path:     /
     defaults: { _controller: AppBundle:Main:index }
+
+app_back:
+    path:     /back
+    defaults: { _controller: AppBundle:Main:back }

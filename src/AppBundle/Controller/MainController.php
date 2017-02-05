@@ -33,4 +33,14 @@ class MainController extends Controller
         var_dump($result);
         return $this->render('app/main/index.html.twig');
     }
+
+    public function backAction(){
+        $stats = $this->getDoctrine()->getRepository('AppBundle:Stat')->findAll();
+        $statstreated = [];
+        foreach ($stats as $stat){
+            $statstreated[$stat->getType()][] = $stat;
+        }
+        return $this->render('app/main/back.html.twig',
+            array('stats' => $statstreated));
+    }
 }

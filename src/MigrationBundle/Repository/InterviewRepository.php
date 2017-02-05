@@ -143,6 +143,7 @@ class InterviewRepository extends \Doctrine\ORM\EntityRepository
     }
 
 
+    // calculating occurence of each job for each job
     public function wordtojob($answer){
         $qb= $this->createQueryBuilder('i')
             ->select('j.id as jobid', 'count(i.id) as total', 'a.id as answerid')

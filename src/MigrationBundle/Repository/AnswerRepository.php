@@ -61,7 +61,7 @@ class AnswerRepository extends \Doctrine\ORM\EntityRepository
         return $qb->getResult();
     }
 
-    /* Query to get the 20 most used word by status */
+    /* Query to get the 20 most used word by age */
     public function getword20byage($ageMin, $ageMax){
         $qb= $this->createQueryBuilder('a')
             ->select('a.word as word', 'count(i) as total')

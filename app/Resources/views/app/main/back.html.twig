@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            {% for stat in stats %}
+            // Build the chart
+            Highcharts.chart('container', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Test'
+                },
+                tooltip: {
+                    pointFormat: '</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: false
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: [
+                        {% for data in stat %}
+                    {
+                    name: 'Test',
+                    colorByPoint: true,
+                    data: [{
+                        name: {{ data.name }},
+                        y: {{ data.number }}
+                    }, {
+                        name: 'Chrome',
+                        y: 0.1,
+                        sliced: true,
+                        selected: true
+                    }]
+                    {% endfor %}
+                }]
+            });
+            {% endfor %}
+        });
+
+    </script>
+{% endblock %}
+
+
