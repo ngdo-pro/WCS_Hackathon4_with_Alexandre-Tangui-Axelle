@@ -165,7 +165,7 @@ class MainController extends Controller
 
         return $this->render('app/main/back.html.twig',
             array('stats' => $statstreated,
-                'title' =>'Classement pour les collégien, lycéen et étudiant'));
+                'title' =>'Classement pour les collégiens, lycéens et étudiants'));
 
     }
 
@@ -181,7 +181,7 @@ class MainController extends Controller
 
         return $this->render('app/main/back.html.twig',
             array('stats' => $statstreated,
-                'title' =>'Classement pour les demandeur d\'emploi, adulte en réorientation et salarié'));
+                'title' =>'Classement pour les demandeurs d\'emploi, adultes en réorientation et salariés'));
 
     }
 
@@ -197,7 +197,7 @@ class MainController extends Controller
 
         return $this->render('app/main/back.html.twig',
             array('stats' => $statstreated,
-                'title' =>'Classement par age pour les -16ans, 17-20ans et 21-25ans'));
+                'title' =>'Classement par âge pour les -16ans, 17-20ans et 21-25ans'));
 
     }
 
@@ -213,7 +213,7 @@ class MainController extends Controller
 
         return $this->render('app/main/back.html.twig',
             array('stats' => $statstreated,
-                'title' =>'Classement par age pour les 26-35ans, 36-45ans et plus'));
+                'title' =>'Classement par âge pour les 26-35ans, 36-45ans et plus'));
 
     }
 }
