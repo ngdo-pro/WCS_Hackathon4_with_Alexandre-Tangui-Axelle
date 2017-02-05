@@ -125,12 +125,12 @@ class MigrationCommand extends ContainerAwareCommand
 
 
             //words
-
+        $totalWords = $doctrine->getRepository('MigrationBundle:Answer', 'migration')->getTotalWord();
         $words = $doctrine->getRepository('MigrationBundle:Answer', 'migration')->getword20();
         foreach ($words as $word) {
             $stat = new Stat();
             $stat->setName($word['word']);
-            $stat->setNumber(round(($word['total']/$totalInt)*100, 2));
+            $stat->setNumber(round(($word['total']/$totalWords)*100, 2));
             $stat->setType('word20-global');
             $targetManager->persist($stat);
         }
@@ -143,7 +143,6 @@ class MigrationCommand extends ContainerAwareCommand
         $sexes = ['H','F'];
         foreach($sexes as $sexe) {
             $totalsexe = $doctrine->getRepository('MigrationBundle:Interview', 'migration')->getTotalBySexe($sexe);
-            $output->writeln($totalsexe);
 
             // calculating stats for domain
 
@@ -178,12 +177,13 @@ class MigrationCommand extends ContainerAwareCommand
             $targetManager->flush();
 
             //calculating stats for words
+            $totalWordsBySexe = $doctrine->getRepository('MigrationBundle:Answer', 'migration')->geTotalBySexe($sexe);
 
             $words = $doctrine->getRepository('MigrationBundle:Answer', 'migration')->getword20bysexe($sexe);
             foreach ($words as $word) {
                 $stat = new Stat();
                 $stat->setName($word['word']);
-                $stat->setNumber($word['total']);
+                $stat->setNumber(round(($word['total']/$totalWordsBySexe)*100, 2));
                 $stat->setType('word20-'.$sexe);
                 $targetManager->persist($stat);
             }
@@ -201,7 +201,6 @@ class MigrationCommand extends ContainerAwareCommand
 
         foreach($statuts as $statut) {
             $totalStatus = $doctrine->getRepository("MigrationBundle:Interview", 'migration')->getTotalByStatus($statut);
-            $output->writeln($totalStatus);
             // calculating stats for domain
 
             $domains = $doctrine->getRepository('MigrationBundle:Interview', 'migration')->get20domainsbystatus($statut);
@@ -235,12 +234,13 @@ class MigrationCommand extends ContainerAwareCommand
             $targetManager->flush();
 
             //calculating stats for words
+            $wordsByStatus = $doctrine->getRepository('MigrationBundle:Answer', 'migration')->getTotalWordByStatus($statut);
 
             $words = $doctrine->getRepository('MigrationBundle:Answer', 'migration')->getword20bystatus($statut);
             foreach ($words as $word) {
                 $stat = new Stat();
                 $stat->setName($word['word']);
-                $stat->setNumber($word['total']);
+                $stat->setNumber(round(($word['total']/$wordsByStatus)*100,2));
                 $stat->setType('word20-'.$statut);
                 $targetManager->persist($stat);
             }
@@ -262,7 +262,6 @@ class MigrationCommand extends ContainerAwareCommand
 
         foreach($ages as $age) {
             $totalByAge = $doctrine->getRepository('MigrationBundle:Interview', 'migration')->getTotalDomainsByAge($age[0], $age[1]);
-            $output->writeln($totalByAge);
 
             // calculating stats for domain
             $domains = $doctrine->getRepository('MigrationBundle:Interview', 'migration')->get20domainsbyage($age[0], $age[1]);
@@ -296,12 +295,13 @@ class MigrationCommand extends ContainerAwareCommand
             $targetManager->flush();
 
             //calculating stats for words
+            $totalWordsByAge = $doctrine->getRepository('MigrationBundle:Answer', 'migration')->getTotalWordByAge($age[0], $age[1]);
 
             $words = $doctrine->getRepository('MigrationBundle:Answer', 'migration')->getword20byage($age[0], $age[1]);
             foreach ($words as $word) {
                 $stat = new Stat();
                 $stat->setName($word['word']);
-                $stat->setNumber($word['total']);
+                $stat->setNumber(round(($word['total']/$totalWordsByAge)*100, 2));
                 $stat->setType('word20-' . $age[0]."-".$age[1]);
                 $targetManager->persist($stat);
             }

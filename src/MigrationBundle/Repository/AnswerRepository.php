@@ -77,4 +77,47 @@ class AnswerRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery();
         return $qb->getResult();
     }
+
+    public function getTotalWord(){
+        $qb= $this->createQueryBuilder('a')
+            ->select('count(i) as total')
+            ->innerJoin('a.interview','i')
+            ->getQuery();
+        return $qb->getSingleScalarResult();
+    }
+
+    public function geTotalBySexe($sexe){
+        $qb= $this->createQueryBuilder('a')
+            ->select('count(i) as total')
+            ->innerJoin('a.interview','i')
+            ->where('u.gender = :sexe')
+            ->setParameter('sexe', $sexe)
+            ->join('i.user', 'u')
+            ->getQuery();
+        return $qb->getSingleScalarResult();
+    }
+
+    public function getTotalWordByStatus($status){
+        $qb= $this->createQueryBuilder('a')
+            ->select('count(i) as total')
+            ->innerJoin('a.interview','i')
+            ->where('u.status = :status')
+            ->setParameter('status', $status)
+            ->join('i.user', 'u')
+            ->getQuery();
+        return $qb->getSingleScalarResult();
+    }
+
+    public function getTotalWordByAge($ageMin, $ageMax){
+        $qb= $this->createQueryBuilder('a')
+            ->select('count(i) as total')
+            ->innerJoin('a.interview','i')
+            ->where('u.age >= :ageMin')
+            ->andWhere('u.age <= :ageMax')
+            ->setParameter('ageMin', $ageMin)
+            ->setParameter('ageMax', $ageMax)
+            ->join('i.user', 'u')
+            ->getQuery();
+        return $qb->getSingleScalarResult();
+    }
 }
