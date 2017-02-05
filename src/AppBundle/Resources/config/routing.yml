@@ -24,3 +24,7 @@ app_back5:
 app_back6:
     path:     /back/6
     defaults: { _controller: AppBundle:Main:back6 }
+
+autocomplete:
+    path:     /autocomplete
+    defaults: { _controller: AppBundle:Main:wordAutocomplete }

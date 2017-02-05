@@ -1,3 +1,0 @@
-migration_homepage:
-    path:     /
-    defaults: { _controller: MigrationBundle:Default:index }

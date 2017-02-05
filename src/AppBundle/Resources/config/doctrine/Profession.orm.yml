@@ -18,5 +18,5 @@ AppBundle\Entity\Profession:
     oneToMany:
         occurences:
             targetEntity: Occurence
-            mappedBy: Profession
+            mappedBy: profession
     lifecycleCallbacks: {  }
