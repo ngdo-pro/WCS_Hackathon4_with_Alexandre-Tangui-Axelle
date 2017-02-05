@@ -146,8 +146,6 @@ class MigrationCommand extends ContainerAwareCommand
 
             foreach ($occunumbers as $occunumber) {
                 $occurence = new Occurence();
-                //     $output->writeln($occunumber['jobid']);
-                //     $output->writeln($occunumber['answerid']);
                 $jobname = $targetManager->getRepository('AppBundle:Profession')->find($occunumber['jobid']);
                 $occurence->setProfession($jobname);
                 $answername = $targetManager->getRepository('AppBundle:Word')->find($occunumber['answerid']);

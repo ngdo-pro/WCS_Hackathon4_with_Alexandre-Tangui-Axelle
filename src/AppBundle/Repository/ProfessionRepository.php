@@ -11,3 +11,4 @@ namespace AppBundle\Repository;
 class ProfessionRepository extends \Doctrine\ORM\EntityRepository
 {
 }
+

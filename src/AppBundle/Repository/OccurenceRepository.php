@@ -10,4 +10,20 @@ namespace AppBundle\Repository;
  */
 class OccurenceRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findjobs($words){
+        $qb= $this->createQueryBuilder('o');
+        $qb->select('o.id');
+        $i=0;
+        $req = "";
+        foreach($words as $word){
+            if ($i > 0){
+                $req.= " OR ";
+            }
+            $req.='o.word'.'= :item'.$i.'';
+            $qb->setParameter('item'.$i, $word);
+            $i++;
+        }
+        $qb->where($req);
+        return $qb->getQuery()->getResult();
+    }
 }
