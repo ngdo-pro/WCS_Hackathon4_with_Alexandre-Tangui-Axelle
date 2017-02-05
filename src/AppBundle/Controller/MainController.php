@@ -22,14 +22,17 @@ class MainController extends Controller
                 'attr'  => array(
                     'class' => 'autocomplete',
                     'id'    => 'searchField1',
+                    'autocomplete' => 'off'
                 ),
-                'required' => false
+                'required' => false,
+
             ))
             ->add('keyword2', TextType::class, array(
                 'label' => 'Mot-clé n°2',
                 'attr'  => array(
                     'class' => 'autocomplete',
                     'id'    => 'searchField2',
+                    'autocomplete' => 'off'
                 ),
                 'required' => false
             ))
@@ -38,6 +41,7 @@ class MainController extends Controller
                 'attr'  => array(
                     'class' => 'autocomplete',
                     'id'    => 'searchField3',
+                    'autocomplete' => 'off'
                 ),
                 'required' => false
             ))
@@ -46,6 +50,7 @@ class MainController extends Controller
                 'attr'  => array(
                     'class' => 'autocomplete',
                     'id'    => 'searchField4',
+                    'autocomplete' => 'off'
                 ),
                 'required' => false
             ))
@@ -54,6 +59,7 @@ class MainController extends Controller
                 'attr'  => array(
                     'class' => 'autocomplete',
                     'id'    => 'searchField5',
+                    'autocomplete' => 'off'
                 ),
                 'required' => false
             ))
