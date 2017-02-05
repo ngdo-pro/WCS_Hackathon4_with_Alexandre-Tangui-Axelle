@@ -93,7 +93,6 @@ class MigrationCommand extends ContainerAwareCommand
 
         $output->writeln("Calculating global stats");
             // domain
-        $output->writeln(" stat 1");
 
         $domains = $doctrine->getRepository('MigrationBundle:Interview', 'migration')->get20domains();
         foreach ($domains as $domain) {
@@ -109,7 +108,6 @@ class MigrationCommand extends ContainerAwareCommand
 
 
             // jobs
-        $output->writeln(" stat 2");
 
         $jobs = $doctrine->getRepository('MigrationBundle:Interview', 'migration')->get20jobs();
 
@@ -127,7 +125,6 @@ class MigrationCommand extends ContainerAwareCommand
 
 
             //words
-        $output->writeln(" stat 3");
 
         $words = $doctrine->getRepository('MigrationBundle:Answer', 'migration')->getword20();
         foreach ($words as $word) {
@@ -137,7 +134,6 @@ class MigrationCommand extends ContainerAwareCommand
             $stat->setType('word20-global');
             $targetManager->persist($stat);
         }
-
 
 
 
@@ -181,6 +177,17 @@ class MigrationCommand extends ContainerAwareCommand
             // $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
             $targetManager->flush();
 
+            //calculating stats for words
+
+            $words = $doctrine->getRepository('MigrationBundle:Answer', 'migration')->getword20bysexe($sexe);
+            foreach ($words as $word) {
+                $stat = new Stat();
+                $stat->setName($word['word']);
+                $stat->setNumber($word['total']);
+                $stat->setType('word20-'.$sexe);
+                $targetManager->persist($stat);
+            }
+
         }
         $output->writeln("Stats by sexe done");
         $output->writeln("");
@@ -220,6 +227,21 @@ class MigrationCommand extends ContainerAwareCommand
                 $stat->setName($job['name']);
                 $stat->setNumber(round(($job['total']/$totalStatus)*100,2));
                 $stat->setType('job20-' . $statut);
+                $targetManager->persist($stat);
+            }
+
+            //  $metadata = $targetManager->getClassMetaData(get_class($stat));
+            // $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+            $targetManager->flush();
+
+            //calculating stats for words
+
+            $words = $doctrine->getRepository('MigrationBundle:Answer', 'migration')->getword20bystatus($statut);
+            foreach ($words as $word) {
+                $stat = new Stat();
+                $stat->setName($word['word']);
+                $stat->setNumber($word['total']);
+                $stat->setType('word20-'.$statut);
                 $targetManager->persist($stat);
             }
 
@@ -273,23 +295,25 @@ class MigrationCommand extends ContainerAwareCommand
             // $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
             $targetManager->flush();
 
+            //calculating stats for words
+
+            $words = $doctrine->getRepository('MigrationBundle:Answer', 'migration')->getword20byage($age[0], $age[1]);
+            foreach ($words as $word) {
+                $stat = new Stat();
+                $stat->setName($word['word']);
+                $stat->setNumber($word['total']);
+                $stat->setType('word20-' . $age[0]."-".$age[1]);
+                $targetManager->persist($stat);
+            }
+
+            //  $metadata = $targetManager->getClassMetaData(get_class($stat));
+            // $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+            $targetManager->flush();
+
+
         }
         $output->writeln("Stats by status done");
         $output->writeln("");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                             /*** LOADING BD FOR SEARCH ENGINE ***/
