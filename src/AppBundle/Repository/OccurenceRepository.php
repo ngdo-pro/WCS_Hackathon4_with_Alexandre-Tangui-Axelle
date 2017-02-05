@@ -19,10 +19,11 @@ class OccurenceRepository extends \Doctrine\ORM\EntityRepository
             if ($i > 0){
                 $req.= " OR ";
             }
-            $req.='o.word'.'= :item'.$i.'';
+            $req.='w.tag'.'= :item'.$i.'';
             $qb->setParameter('item'.$i, $word);
             $i++;
         }
+        $qb->join('o.word', 'w');
         $qb->where($req);
         return $qb->getQuery()->getResult();
     }
