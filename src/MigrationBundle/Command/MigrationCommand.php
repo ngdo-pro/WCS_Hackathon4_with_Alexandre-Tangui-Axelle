@@ -55,8 +55,9 @@ class MigrationCommand extends ContainerAwareCommand
         $metadata = $targetManager->getClassMetaData(get_class($word));
         $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
         $targetManager->flush();
-        $output->writeln("");
         $output->writeln("Importing Words done");
+        $output->writeln("");
+
 
         // migrating job database to profession
 
@@ -75,68 +76,217 @@ class MigrationCommand extends ContainerAwareCommand
         $metadata = $targetManager->getClassMetaData(get_class($profession));
         $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
         $targetManager->flush();
-        $output->writeln("");
         $output->writeln("Importing Professions done");
+        $output->writeln("");
 
-        // calculating stats domain by sexe
+
+        /**** STATISTICS ****/
 
         $this->truncate('stat');
-        $output->writeln("Calculating stats");
 
+        // Global stats
+
+        $output->writeln("Calculating global stats");
+            // domain
+        $output->writeln(" stat 1");
+
+        $domains = $doctrine->getRepository('MigrationBundle:Interview', 'migration')->get20domains();
+        foreach ($domains as $domain) {
+            $stat = new Stat();
+            $stat->setName($domain['domain']);
+            $stat->setNumber($domain['total']);
+            $stat->setType('domain20-global');
+            $targetManager->persist($stat);
+        }
+        //  $metadata = $targetManager->getClassMetaData(get_class($stat));
+        // $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+        $targetManager->flush();
+
+
+            // jobs
+        $output->writeln(" stat 2");
+
+        $jobs = $doctrine->getRepository('MigrationBundle:Interview', 'migration')->get20jobs();
+
+        foreach ($jobs as $job) {
+            $stat = new Stat();
+            $stat->setName($job['name']);
+            $stat->setNumber($job['total']);
+            $stat->setType('job20-global');
+            $targetManager->persist($stat);
+        }
+
+        //  $metadata = $targetManager->getClassMetaData(get_class($stat));
+        // $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+        $targetManager->flush();
+
+
+            //words
+        $output->writeln(" stat 3");
+
+        $words = $doctrine->getRepository('MigrationBundle:Answer', 'migration')->getword20();
+        foreach ($words as $word) {
+            $stat = new Stat();
+            $stat->setName($word['word']);
+            $stat->setNumber($word['total']);
+            $stat->setType('word20-global');
+            $targetManager->persist($stat);
+        }
+
+
+
+
+        // Stats by sexes
+
+        $output->writeln("Calculating stats by sexe");
         $sexes = ['H','F'];
 
         foreach($sexes as $sexe) {
+
+            // calculating stats for domain
+
             $domains = $doctrine->getRepository('MigrationBundle:Interview', 'migration')->get20domainsbysexe($sexe);
 
-            $id = 1;
             foreach ($domains as $domain) {
                 $stat = new Stat();
-                $stat->setId($id);
                 $stat->setName($domain['domain']);
                 $stat->setNumber($domain['total']);
-                $stat->setType('domain20' . $sexe);
+                $stat->setType('domain20-' . $sexe);
                 $targetManager->persist($stat);
-
-                $id++;
             }
 
             //  $metadata = $targetManager->getClassMetaData(get_class($stat));
             // $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
             $targetManager->flush();
+
+            // calculating stats for job
+
+            $jobs = $doctrine->getRepository('MigrationBundle:Interview', 'migration')->get20jobsbysexe($sexe);
+
+            foreach ($jobs as $job) {
+                $stat = new Stat();
+                $stat->setName($job['name']);
+                $stat->setNumber($job['total']);
+                $stat->setType('job20-' . $sexe);
+                $targetManager->persist($stat);
+            }
+
+            //  $metadata = $targetManager->getClassMetaData(get_class($stat));
+            // $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+            $targetManager->flush();
+
         }
+        $output->writeln("Stats by sexe done");
         $output->writeln("");
-        $output->writeln("Importing Professions done");
 
-        // calculating stats domain by sexe
-        /*
-                $this->truncate('stat');
-                $output->writeln("Calculating stats");
 
-                $sexes = ['H','F'];
 
-                foreach($sexes as $sexe) {
-                    $domains = $doctrine->getRepository('MigrationBundle:Interview', 'migration')->get20domainsbysexe($sexe);
+        // Stats by statut
 
-                    $id = 1;
-                    foreach ($domains as $domain) {
-                        $stat = new Stat();
-                        $stat->setId($id);
-                        $stat->setName($domain['domain']);
-                        $stat->setNumber($domain['total']);
-                        $stat->setType('domain20' . $sexe);
-                        $targetManager->persist($stat);
+        $output->writeln("Calculating stats by status");
+        $statuts = ['Collégien','Lycéen', 'Etudiant', 'Parent', 'Demandeur d\'emploi', 'Adulte en réorientation', 'Professionnel de l\'orientation et de la formation', 'Salarié', 'Autre'];
 
-                        $id++;
-                    }
+        foreach($statuts as $statut) {
 
-                    //  $metadata = $targetManager->getClassMetaData(get_class($stat));
-                    // $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
-                    $targetManager->flush();
-                }
-        */
-        // charging occurence
+            // calculating stats for domain
 
-        $output->writeln("Calculating occurence");
+            $domains = $doctrine->getRepository('MigrationBundle:Interview', 'migration')->get20domainsbystatus($statut);
+
+            foreach ($domains as $domain) {
+                $stat = new Stat();
+                $stat->setName($domain['domain']);
+                $stat->setNumber($domain['total']);
+                $stat->setType('domain20-' . $statut);
+                $targetManager->persist($stat);
+            }
+
+            //  $metadata = $targetManager->getClassMetaData(get_class($stat));
+            // $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+            $targetManager->flush();
+
+            // calculating stats for job
+
+            $jobs = $doctrine->getRepository('MigrationBundle:Interview', 'migration')->get20jobsbystatus($statut);
+
+            foreach ($jobs as $job) {
+                $stat = new Stat();
+                $stat->setName($job['name']);
+                $stat->setNumber($job['total']);
+                $stat->setType('job20-' . $statut);
+                $targetManager->persist($stat);
+            }
+
+            //  $metadata = $targetManager->getClassMetaData(get_class($stat));
+            // $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+            $targetManager->flush();
+
+        }
+        $output->writeln("Stats by status done");
+        $output->writeln("");
+
+
+
+        // Stats by age
+
+        $output->writeln("Calculating stats by age");
+        $ages = [[0,16],[17,20], [21,25],[26,35],[36,45],[46,100],];
+
+        foreach($ages as $age) {
+
+            // calculating stats for domain
+
+            $domains = $doctrine->getRepository('MigrationBundle:Interview', 'migration')->get20domainsbyage($age[0], $age[1]);
+
+            foreach ($domains as $domain) {
+                $stat = new Stat();
+                $stat->setName($domain['domain']);
+                $stat->setNumber($domain['total']);
+                $stat->setType('domain20-'.$age[0]."-".$age[1]);
+                $targetManager->persist($stat);
+            }
+
+            //  $metadata = $targetManager->getClassMetaData(get_class($stat));
+            // $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+            $targetManager->flush();
+
+            // calculating stats for job
+
+            $jobs = $doctrine->getRepository('MigrationBundle:Interview', 'migration')->get20jobsbyage($age[0], $age[1]);
+
+            foreach ($jobs as $job) {
+                $stat = new Stat();
+                $stat->setName($job['name']);
+                $stat->setNumber($job['total']);
+                $stat->setType('job20-' . $age[0]."-".$age[1]);
+                $targetManager->persist($stat);
+            }
+
+            //  $metadata = $targetManager->getClassMetaData(get_class($stat));
+            // $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
+            $targetManager->flush();
+
+        }
+        $output->writeln("Stats by status done");
+        $output->writeln("");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            /*** LOADING BD FOR SEARCH ENGINE ***/
+
+        $output->writeln("Calculating occurences");
         $this->truncate('occurence');
         $output->writeln('occurence truncated');
         $totalRecords = 1558;
@@ -152,19 +302,16 @@ class MigrationCommand extends ContainerAwareCommand
                 $occurence->setWord($answername);
                 $occurence->setNumber($occunumber['total']);
                 $targetManager->persist($occurence);
-                $progress->advance();
             }
+            $progress->advance();
         }
 
             $metadata = $targetManager->getClassMetaData(get_class($occurence));
             $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
             $targetManager->flush();
         $output->writeln("");
-        $output->writeln("Importing Words done");
 
-
-        $output->writeln("");
-        $output->writeln("Importing Professions done");
+        $output->writeln("Calculating occurence done");
 
 
     }
