@@ -1,5 +1,5 @@
 app_homepage:
-    path:     /
+    path:     /{words}
     defaults: { _controller: AppBundle:Main:index }
 
 autocomplete:
