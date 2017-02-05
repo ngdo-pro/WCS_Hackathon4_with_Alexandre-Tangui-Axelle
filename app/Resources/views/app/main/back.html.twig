@@ -3,8 +3,16 @@
 {% block content %}
     <div class="container">
 
-        <h1 style="text-align:center">{{ title }}</h1>
+        <h3 style="text-align:center">{{ title }}</h3>
         <br>
+        <div class="center-align">
+        <a class="btn" href="{{ path('app_back1') }}">1</a>
+        <a class="btn" href="{{ path('app_back2') }}">2</a>
+        <a class="btn" href="{{ path('app_back3') }}">3</a>
+        <a class="btn" href="{{ path('app_back4') }}">4</a>
+        <a class="btn" href="{{ path('app_back5') }}">5</a>
+        <a class="btn" href="{{ path('app_back6') }}">6</a>
+        </div>
         {% for stat in stats %}
             <div align="center">
                 <table style="text-align:center" border="1">
