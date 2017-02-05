@@ -3,21 +3,108 @@
 {% block content %}
     <div class="container">
 
-        <h1 style="text-align:center">{{ title }}</h1>
+        <h1 class="center-align">{{ title }}</h1>
         <br>
         {% for stat in stats %}
             <div align="center">
-                <table style="text-align:center" border="1">
-                    {# <tr>
-                         <th>Firstname</th>
-                         <th>Lastname</th>
-                     </tr> #}
-
+                <table class="centered bordered striped highlight z-depth-3">
                     {% for data in stat %}
+                        {% if loop.first %}
+                            {% if data.type == 'domain20-global' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 domaines les plus répandus</h3></caption>
+                            {% elseif data.type == 'job20-global' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 jobs les plus répandus</h3></caption>
+                            {% elseif data.type == 'word20-global' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 mots-clés les plus répandus</h3></caption>
+                            {% elseif data.type == 'domain20-H' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 domaines les plus répandus parmi les hommes</h3></caption>
+                            {% elseif data.type == 'job20-H' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 jobs les plus répandus parmi les hommes</h3></caption>
+                            {% elseif data.type == 'word20-H' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 mots-clés les plus répandus parmi les hommes</h3></caption>
+                            {% elseif data.type == 'domain20-F' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 domaines les plus répandus parmi les femmes</h3></caption>
+                            {% elseif data.type == 'job20-F' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 jobs les plus répandus parmi les femmes</h3></caption>
+                            {% elseif data.type == 'word20-F' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 mots-clés les plus répandus parmi les femmes</h3></caption>
+                            {% elseif data.type == 'domain20-Collégien' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 domaines les plus répandus parmi les collégiens</h3></caption>
+                            {% elseif data.type == 'job20-Collégien' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 jobs les plus répandus parmi les collégiens</h3></caption>
+                            {% elseif data.type == 'word20-Collégien' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 mots-clés les plus répandus parmi les collégiens</h3></caption>
+                            {% elseif data.type == 'domain20-Lycéen' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 domaines les plus répandus parmi les lycéens</h3></caption>
+                            {% elseif data.type == 'job20-Lycéen' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 jobs les plus répandus parmi les lycéens</h3></caption>
+                            {% elseif data.type == 'word20-Lycéen' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 mots-clés les plus répandus parmi les lycéens</h3></caption>
+                            {% elseif data.type == 'domain20-Etudiant' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 domaines les plus répandus parmi les étudiants</h3></caption>
+                            {% elseif data.type == 'job20-Etudiant' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 jobs les plus répandus parmi les étudiants</h3></caption>
+                            {% elseif data.type == 'word20-Etudiant' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 mots-clés les plus répandus parmi les étudiants</h3></caption>
+                            {% elseif data.type == 'domain20-Demandeur d\'emploi' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 domaines les plus répandus parmi les demandeurs d'emplois</h3></caption>
+                            {% elseif data.type == 'job20-Demandeur d\'emploi' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 jobs les plus répandus parmi les demandeurs d'emplois</h3></caption>
+                            {% elseif data.type == 'word20-Demandeur d\'emploi' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 mots-clés les plus répandus parmi les demandeurs d'emplois</h3></caption>
+                            {% elseif data.type == 'domain20-Adulte en réorientation' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 domaines les plus répandus parmi les adultes en réorientation</h3></caption>
+                            {% elseif data.type == 'job20-Adulte en réorientation' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 jobs les plus répandus parmi les adultes en réorientation</h3></caption>
+                            {% elseif data.type == 'word20-Adulte en réorientation' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 mots-clés les plus répandus parmi les adultes en réorientation</h3></caption>
+                            {% elseif data.type == 'domain20-Salarié' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 domaines les plus répandus parmi les salariés</h3></caption>
+                            {% elseif data.type == 'job20-Salarié' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 jobs les plus répandus parmi les salariés</h3></caption>
+                            {% elseif data.type == 'word20-Salarié' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 mots-clés les plus répandus parmi les salariés</h3></caption>
+                            {% elseif data.type == 'domain20-Autre' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 domaines les plus répandus parmi les autres</h3></caption>
+                            {% elseif data.type == 'job20-Autre' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 jobs les plus répandus parmi les autres</h3></caption>
+                            {% elseif data.type == 'word20-Autre' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 mots-clés les plus répandus parmi les autres</h3></caption>
+                            {% elseif data.type == 'domain20-0-16' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 domaines les plus répandus parmi les moins de 16 ans</h3></caption>
+                            {% elseif data.type == 'job20-0-16' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 jobs les plus répandus parmi les moins de 16 ans</h3></caption>
+                            {% elseif data.type == 'word20-0-16' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 mots-clés les plus répandus parmi les moins de 16 ans</h3></caption>
+                            {% elseif data.type == 'domain20-17-20' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 domaines les plus répandus parmi les 17-20 ans</h3></caption>
+                            {% elseif data.type == 'job20-17-20' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 jobs les plus répandus parmi les 17-20 ans</h3></caption>
+                            {% elseif data.type == 'word20-17-20' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 mots-clés les plus répandus parmi les 17-20 ans</h3></caption>
+                            {% elseif data.type == 'domain20-21-25' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 domaines les plus répandus parmi les 21-25 ans</h3></caption>
+                            {% elseif data.type == 'job20-21-25' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 jobs les plus répandus parmi les 21-25 ans</h3></caption>
+                            {% elseif data.type == 'word20-21-25' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 mots-clés les plus répandus parmi les 21-25 ans</h3></caption>
+                            {% elseif data.type == 'domain20-26-35' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 domaines les plus répandus parmi les 26-35 ans</h3></caption>
+                            {% elseif data.type == 'job20-26-35' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 jobs les plus répandus parmi les 26-35 ans</h3></caption>
+                            {% elseif data.type == 'word20-26-35' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 mots-clés les plus répandus parmi les 26-35 ans</h3></caption>
+                            {% elseif data.type == 'domain20-36-45' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 domaines les plus répandus parmi les 36-45 ans</h3></caption>
+                            {% elseif data.type == 'job20-36-45' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 jobs les plus répandus parmi les 36-45 ans</h3></caption>
+                            {% elseif data.type == 'word20-36-45' %}
+                                <caption class="black-text z-depth-3"><h3>Les 20 mots-clés les plus répandus parmi les 36-45 ans</h3></caption>
+                            {% endif %}
+                        {% endif %}
                         <tr>
                             <td>{{ data.name }}</td>
                             <td>{{ data.number }} %</td>
-
                         </tr>
                     {% endfor %}
                 </table>
