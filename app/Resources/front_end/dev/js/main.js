@@ -130,6 +130,35 @@ $(document).ready(function(){
         }
     });
 
+    $('button').click(function(e){
+         e.preventDefault();
+         var keyword1 = $("#form_keyword1").val();
+         var keyword2 = $("#form_keyword2").val();
+         var keyword3 = $("#form_keyword3").val();
+         var keyword4 = $("#form_keyword4").val();
+         var keyword5 = $("#form_keyword5").val();
+         var words = [keyword1, keyword2, keyword3, keyword4, keyword5];
+         $.ajax({
+             type: 'POST',
+             url: '/result',
+             data: {words: words},
+             dataType: 'json',
+             timeout: 3000,
+             success: function(response){
+                 $('#jobs').html(" ");
+                 for(var i=0; i< response.length; i++){
+                     $('#jobs').append(
+                         '<div class="z-depth-3 jobcards hoverable col s4 offset-s1"><h4 class="center-align">'+ response[i] +'</h4></div>'
+                     )
+                 }
+             },
+             error: function() {
+                 $('#wordautocomp').text('Ajax call error');
+             }
+
+         })
+    });
+
     $('#showInput2').click(function(e){
         e.preventDefault();
         $('#input2').removeClass('hide');

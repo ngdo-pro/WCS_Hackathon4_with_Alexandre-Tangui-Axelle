@@ -59,7 +59,7 @@ class MainController extends Controller
             ))
             ->getForm();
 
-        $form->handleRequest($request);
+        /*$form->handleRequest($request);
 
         if($form->isSubmitted()){
             $datas = $form->getData();
@@ -93,7 +93,7 @@ class MainController extends Controller
             return $this->render('app/main/results.html.twig', array(
                 'results' => $result
             ));
-        }
+        }*/
 
 
         return $this->render('app/main/index.html.twig', array(
@@ -108,5 +108,39 @@ class MainController extends Controller
         $words = $em->getRepository(Word::class)->searchWords($keyword);
 
         return new JsonResponse($words);
+    }
+
+    public function resultAction(Request $request)
+    {
+        $datas = $request->request->get('words');
+        $words = array();
+        foreach ($datas as $data){
+            if($data != null){
+                $words[] = $data;
+            }
+
+        }
+        $alljobs = $this->getDoctrine()->getRepository('AppBundle:Occurence')->findjobs($words);
+        $nbword = count($words);
+        $sortings = [];
+        foreach ($alljobs as $key => $alljob){
+            $jobname = $this->getDoctrine()->getRepository('AppBundle:Occurence')->find($alljob['id'])->getProfession()->getName();
+
+            if (array_key_exists($jobname , $sortings)){
+                $sortings[$jobname]++;
+            }
+            else
+            {
+                $sortings[$jobname]=1;
+            }
+        }
+        $result=[];
+        foreach($sortings as $key => $value){
+            if($value == $nbword){
+                $result[]=$key;
+            }
+        }
+
+        return new JsonResponse($result);
     }
 }

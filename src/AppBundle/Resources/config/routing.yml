@@ -5,3 +5,7 @@ app_homepage:
 autocomplete:
     path:     /autocomplete
     defaults: { _controller: AppBundle:Main:wordAutocomplete }
+
+result:
+    path:     /result
+    defaults: { _controller: AppBundle:Main:result }
