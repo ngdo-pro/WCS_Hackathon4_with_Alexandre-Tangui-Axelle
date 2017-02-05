@@ -1,0 +1,22 @@
+AppBundle\Entity\Profession:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\ProfessionRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        domain:
+            type: string
+            length: 255
+    oneToMany:
+        occurences:
+            targetEntity: Occurence
+            mappedBy: profession
+    lifecycleCallbacks: {  }

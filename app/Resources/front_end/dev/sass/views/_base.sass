@@ -1,0 +1,51 @@
+@import "imports"
+
+body
+  display: flex
+  min-height: 100vh
+  flex-direction: column
+
+  header
+    align-items: center
+    background: $first-color
+    display: flex
+    flex-direction: column
+    height: 100vh
+    justify-content: center
+    a
+      i
+        &.material-icons
+          font-size: 4rem
+
+  main
+    background: #eee
+    color: $first-color
+    flex: 1 0 auto
+    min-height: 90vh
+    button
+      margin-top: 1rem
+
+  footer
+    background: $first-color
+    color: $second-color
+    div
+      align-items: center
+      display: flex
+      justify-content: center
+      min-height: 10vh
+      &.row
+        margin-bottom: 0
+      div
+        align-items: center
+        display: flex
+        justify-content: center
+
+#navbuttons
+  margin-bottom: 20px
+
+td
+  font-size: 1.25rem
+
+#section1
+  h2
+    margin: 50px 0

@@ -1,3 +1,34 @@
 app_homepage:
     path:     /
     defaults: { _controller: AppBundle:Main:index }
+
+app_back:
+    path:     /back
+    defaults: { _controller: AppBundle:Main:back }
+
+app_back1:
+    path:     /back/1
+    defaults: { _controller: AppBundle:Main:back1 }
+app_back2:
+    path:     /back/2
+    defaults: { _controller: AppBundle:Main:back2 }
+app_back3:
+    path:     /back/3
+    defaults: { _controller: AppBundle:Main:back3 }
+app_back4:
+    path:     /back/4
+    defaults: { _controller: AppBundle:Main:back4 }
+app_back5:
+    path:     /back/5
+    defaults: { _controller: AppBundle:Main:back5 }
+app_back6:
+    path:     /back/6
+    defaults: { _controller: AppBundle:Main:back6 }
+
+autocomplete:
+    path:     /autocomplete
+    defaults: { _controller: AppBundle:Main:wordAutocomplete }
+
+result:
+    path:     /result
+    defaults: { _controller: AppBundle:Main:result }

@@ -2,7 +2,36 @@
 
 {% block content %}
 
-    <h1>Welcome to NGDO's Symfony StarterKit !</h1>
-    <p>This is the index page. You can edit it in app/Resources/views/app/main/index.html.twig !</p>
+    <div class="row">
+        <div class="col s10 offset-s1">
+            <div class="row">
+                {{ form_start(form) }}
+                <div class="input-field col s2" id="input1">
+                    {{ form_row(form.keyword1) }}
+                </div>
+                <div class="input-field col s2" id="input2">
+                    {{ form_row(form.keyword2) }}
+                </div>
+                <div class="input-field col s2" id="input3">
+                    {{ form_row(form.keyword3) }}
+                </div>
+                <div class="input-field col s2" id="input4">
+                    {{ form_row(form.keyword4) }}
+                </div>
+                <div class="input-field col s2" id="input5">
+                    {{ form_row(form.keyword5) }}
+                </div>
+                <div class="col s2">
+                    <button class="btn center waves-effect waves-light">Chercher</button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s8 offset-s2" id="jobs">
+
+        </div>
+    </div>
 
 {% endblock %}

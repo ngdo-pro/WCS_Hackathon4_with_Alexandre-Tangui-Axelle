@@ -6,9 +6,17 @@ var sass    = require('gulp-sass');
 
 //paths is an object containing all paths of the assets
 var paths = {
-    vendorJs: [],
-    vendorCss: [],
-    fonts: [],
+    vendorJs: [
+        './app/Resources/front_end/vendors/vue/dist/vue.min.js',
+        './app/Resources/front_end/vendors/jquery/dist/jquery.min.js',
+        './app/Resources/front_end/vendors/materialize/dist/js/materialize.min.js'
+    ],
+    vendorCss: [
+        './app/Resources/front_end/vendors/materialize/dist/css/materialize.min.css'
+    ],
+    fonts: [
+        './app/Resources/front_end/vendors/materialize/dist/fonts/**/*'
+    ],
     js: [
         './app/Resources/front_end/dev/js/*.js'
     ],
@@ -100,7 +108,8 @@ gulp.task('src', ['js', 'sass', 'images'], function(){
 
 //the "watch" file automatically runs other tasks on change on "watched" files
 gulp.task('watch', function(){
-    gulp.watch([paths.sass], ['sass'])
+    gulp.watch([paths.sass], ['sass']);
+    gulp.watch([paths.js], ['js']);
 });
 
 //the "clean" task delete the /web/assets directory
