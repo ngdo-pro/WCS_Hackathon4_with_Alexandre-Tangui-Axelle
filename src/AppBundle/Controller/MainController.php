@@ -40,6 +40,7 @@ class MainController extends Controller
         foreach ($stats as $stat){
             $statstreated[$stat->getType()][] = $stat;
         }
+      //  var_dump($statstreated);
         return $this->render('app/main/back.html.twig',
             array('stats' => $statstreated));
     }
