@@ -11,7 +11,36 @@ namespace MigrationBundle\Repository;
 
 class InterviewRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function get20domainsbysexe($sexe) { //  function that returns the 20 most asnwered domains
+    // function that returns the 20 most answered jobs
+    public function get20jobs() {
+        $qb = $this->createQueryBuilder('i')
+            ->select('j.name as name', 'count(i.id) as total')
+            ->innerJoin('i.job', 'j')
+            ->groupBy('i.job')
+            ->orderBy('total', 'DESC')
+            ->setMaxResults(20)
+            ->getQuery();
+
+        return $qb->getResult();
+
+    }
+
+    //  function that returns the 20 most answered domains
+    public function get20domains()
+    {
+        $qb = $this->createQueryBuilder('i')
+            ->select('j.domain as domain', 'count(i.id) as total')
+            ->innerJoin('i.job', 'j')
+            ->groupBy('j.domain')
+            ->orderBy('total', 'DESC')
+            ->setMaxResults(20)
+            ->getQuery();
+
+        return $qb->getResult();
+    }
+
+    // function that returns the 20 most answered domains by sexe
+    public function get20domainsbysexe($sexe) {
         $qb = $this->createQueryBuilder('i')
             ->select('j.domain as domain', 'count(i.id) as total')
             ->innerJoin( 'i.job', 'j')
@@ -26,12 +55,30 @@ class InterviewRepository extends \Doctrine\ORM\EntityRepository
         return $qb->getResult();
     }
 
-    public function get20wordsbysexe($sexe) { //  function that returns the 20 most asnwered domains
+    // function that returns the 20 most answered jobs by sexe
+    public function get20jobsbysexe($sexe)
+    {
+        $qb = $this->createQueryBuilder('i')
+            ->select('j.name as name', 'count(i.id) as total')
+            ->innerJoin('i.job', 'j')
+            ->where('u.gender = :sexe')
+            ->setParameter('sexe', $sexe)
+            ->innerJoin('i.user', 'u')
+            ->groupBy('i.job')
+            ->orderBy('total', 'DESC')
+            ->setMaxResults(20)
+            ->getQuery();
+
+        return $qb->getResult();
+    }
+
+    // function that returns the 20 most answered domains by status
+    public function get20domainsbystatus($statut) {
         $qb = $this->createQueryBuilder('i')
             ->select('j.domain as domain', 'count(i.id) as total')
             ->innerJoin( 'i.job', 'j')
-            ->where('u.gender = :sexe')
-            ->setParameter('sexe', $sexe)
+            ->where('u.status = :statut')
+            ->setParameter('statut', $statut)
             ->innerJoin('i.user', 'u')
             ->groupBy('j.domain')
             ->orderBy('total', 'DESC')
@@ -40,6 +87,61 @@ class InterviewRepository extends \Doctrine\ORM\EntityRepository
 
         return $qb->getResult();
     }
+
+    // function that returns the 20 most answered jobs by status
+    public function get20jobsbystatus($statut)
+    {
+        $qb = $this->createQueryBuilder('i')
+            ->select('j.name as name', 'count(i.id) as total')
+            ->innerJoin('i.job', 'j')
+            ->where('u.status = :statut')
+            ->setParameter('statut', $statut)
+            ->innerJoin('i.user', 'u')
+            ->groupBy('i.job')
+            ->orderBy('total', 'DESC')
+            ->setMaxResults(20)
+            ->getQuery();
+
+        return $qb->getResult();
+    }
+
+    // function that returns the 20 most answered jobs by age
+    public function get20jobsbyage($ageMin, $ageMax)
+    {
+        $qb = $this->createQueryBuilder('i')
+            ->select('j.name as name', 'count(i.id) as total')
+            ->innerJoin('i.job', 'j')
+            ->where('u.age >= :ageMin')
+            ->andWhere('u.age <= :ageMax')
+            ->setParameter('ageMin', $ageMin)
+            ->setParameter('ageMax', $ageMax)
+            ->innerJoin('i.user', 'u')
+            ->groupBy('i.job')
+            ->orderBy('total', 'DESC')
+            ->setMaxResults(20)
+            ->getQuery();
+
+        return $qb->getResult();
+    }
+
+    // function that returns the 20 most answered domains by age
+    public function get20domainsbyage($ageMin, $ageMax) {
+        $qb = $this->createQueryBuilder('i')
+            ->select('j.domain as domain', 'count(i.id) as total')
+            ->innerJoin( 'i.job', 'j')
+            ->where('u.age >= :ageMin')
+            ->andWhere('u.age <= :ageMax')
+            ->setParameter('ageMin', $ageMin)
+            ->setParameter('ageMax', $ageMax)
+            ->innerJoin('i.user', 'u')
+            ->groupBy('j.domain')
+            ->orderBy('total', 'DESC')
+            ->setMaxResults(20)
+            ->getQuery();
+
+        return $qb->getResult();
+    }
+
 
     public function wordtojob($answer){
         $qb= $this->createQueryBuilder('i')
